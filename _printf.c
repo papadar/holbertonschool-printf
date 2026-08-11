@@ -60,7 +60,8 @@ int (*get_op_func(const char *s))(int n, va_list argList)
 
 int printChar(int n, va_list charList)
 {
-	/*_putchar(charList[n]);*/
+	char c = (char) va_arg(charList, int);
+	_putchar(c);
 	return (0);
 }
 
