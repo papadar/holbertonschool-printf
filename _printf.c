@@ -10,10 +10,10 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int i, j, k;
-	void (*func)(va_list arglist);
+	void (*func)(int n, va_list arglist);
 
 	va_start(args, format);
-	i = 0;
+	i = j = 0;
 	while (format && format[i])
 	{
 		if (strcmp(format[i],'%') != 0)
@@ -22,18 +22,39 @@ int _printf(const char *format, ...)
 		}
 		else 
 		{
+			j++;
 			func = get_op_func(format[i+1]);
 			if (func == NULL)
 			{
 				exit(99);
 			}		
-			func()
+			func(j, argList);
 		}
 		i++;
 	}
 }
 
-int (*get_op_func(char *s))(va_list argList)
+void printChar(int n, va_list charList)
+{
+	_putchar(charList[n]);
+}
+
+void printStr(int n, va_list strList)
+{
+	_putchar(strList[n]);
+}
+
+void printInt(int n, va_list intList)
+{
+        _putchar(intList[n]);
+}
+
+void printFlot(int n, va_list flotList)
+{
+	_putchar(flotList[n]);
+}
+
+int (*get_op_func(char *s))(int n, va_list argList)
 {
 	op_t ops[] = {
 		{"c", printChar},
