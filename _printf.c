@@ -45,13 +45,13 @@ int (*get_op_func(const char *s))(int n, va_list argList)
                 {"s", printStr},
                 {NULL, NULL}
         };
-        int i = 0;
+        int i;
 
         while (ops[i].op)
         {
                 if (strcmp(ops[i].op, s) == 0)
                 {
-                        return (op[i].f);
+                        return (ops[i].f);
                 }
                 i++;
         }
