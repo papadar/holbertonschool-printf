@@ -1,5 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
+#include <string.h>
+#include <stdlib.h>
 
 /**
  * _printf - print a string interspersed with other vars
@@ -10,68 +12,72 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int i, j, k;
-	void (*func)(int n, va_list arglist);
+	int (*func)(int n, va_list arglist);
 
 	va_start(args, format);
 	i = j = 0;
 	while (format && format[i])
 	{
-		if (strcmp(format[i],'%') != 0)
+		if (format[i] != '%')
 		{
 			_putchar(format[i]);
 		}
 		else 
 		{
 			j++;
-			func = get_op_func(format[i+1]);
+			func = get_op_func(&format[i + 1]);
 			if (func == NULL)
 			{
 				exit(99);
 			}		
-			func(j, argList);
+			func(j, args);
 		}
 		i++;
 	}
 }
 
-void printChar(int n, va_list charList)
+int (*get_op_func(const char *s))(int n, va_list argList)
 {
-	_putchar(charList[n]);
+        op_t ops[] = {
+                {"c", printChar},
+                {"i", printInt},
+                {"d", printFlot},
+                {"s", printStr},
+                {NULL, NULL}
+        };
+        int i = 0;
+
+        while (ops[i].op)
+        {
+                if (strcmp(ops[i].op, s) == 0)
+                {
+                        return (op[i].f);
+                }
+                i++;
+        }
+        return (NULL);
 }
 
-void printStr(int n, va_list strList)
+int printChar(int n, va_list charList)
 {
-	_putchar(strList[n]);
+	/*_putchar(charList[n]);*/
+	return (0);
 }
 
-void printInt(int n, va_list intList)
+int printStr(int n, va_list strList)
 {
-        _putchar(intList[n]);
+	/*_putchar(strList[n]);*/
+	return (0);
 }
 
-void printFlot(int n, va_list flotList)
+int printInt(int n, va_list intList)
 {
-	_putchar(flotList[n]);
+        /*_putchar(intList[n]);*/
+	return (0);
 }
 
-int (*get_op_func(char *s))(int n, va_list argList)
+int printFlot(int n, va_list flotList)
 {
-	op_t ops[] = {
-		{"c", printChar},
-		{"i", printInt},
-		{"d", printFlot},
-		{"s", printStr},
-		{NULL, NULL}
-	};
-	int i;
-
-	while (ops[i].op)
-	{
-		if (strcmp(ops[i].op, s) == 0)
-		{
-			return (op[i].f);
-		}
-		i++;
-	}
-	return (NULL);
-}
+	/*_putchar(flotList[n]);*/
+	return (0);
+}	
