@@ -46,7 +46,7 @@ int (*get_op_func(const char *s))(va_list argList)
                 {"s", printStr},
                 {NULL, NULL}
         };
-        int i;
+        int i = 0;
 
         while (ops[i].op)
         {
@@ -77,9 +77,11 @@ int printStr(va_list strList)
 		str = "(nil)";
 
 	while (str[i] != '\0')
-	       count += _putchar(str[i]);	
-
-	return (0);
+	{
+		count += _putchar(str[i]);	
+		i++;
+	}
+	return (count);
 }
 
 int printInt(va_list intList)
@@ -96,7 +98,7 @@ int printInt(va_list intList)
 	else
 		abs_num = (unsigned int)num;
 	
-	if (abs_num / 10) {
+	while (abs_num / 10) {
 		count += _putchar((abs_num / 10) + '0');
 	}
 	count += _putchar((abs_num % 10) + '0');
