@@ -11,12 +11,12 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i;
-	int count;
+	int i = 0;
+	int count = 0;
 	int (*func)(va_list arglist);
 
 	va_start(args, format);
-	i = 0;
+
 	while (format && format[i])
 	{
 		if (format[i] != '%')
