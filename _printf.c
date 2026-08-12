@@ -11,11 +11,11 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i, j, k;
-	int (*func)(int n, va_list arglist);
+	int i, k;
+	int (*func)(va_list arglist);
 
 	va_start(args, format);
-	i = j = 0;
+	i = 0;
 	while (format && format[i])
 	{
 		if (format[i] != '%')
@@ -24,19 +24,18 @@ int _printf(const char *format, ...)
 		}
 		else 
 		{
-			j++;
 			func = get_op_func(&format[i + 1]);
 			if (func == NULL)
 			{
 				exit(99);
 			}		
-			func(j, args);
+			func(args);
 		}
 		i++;
 	}
 }
 
-int (*get_op_func(const char *s))(int n, va_list argList)
+int (*get_op_func(const char *s))(va_list argList)
 {
         op_t ops[] = {
                 {"c", printChar},
@@ -58,26 +57,51 @@ int (*get_op_func(const char *s))(int n, va_list argList)
         return (NULL);
 }
 
-int printChar(int n, va_list charList)
+int printChar(va_list charList)
 {
-	char c = (char) va_arg(charList, int);
-	_putchar(c);
+	char c = (char)va_arg(charList, int);
+	return (_putchar(c));
+}
+
+int printStr(va_list strList)
+{
+	char *str;
+	int i, count;
+
+	str = va_arg(strList, char *);
+	i = count = 0;
+
+	if (str == NULL)
+		str = "(nil)";
+
+	while (str[i] != '\0')
+	       count += _putchar(str[i]);	
+
 	return (0);
 }
 
-int printStr(int n, va_list strList)
+int printInt(va_list intList)
 {
-	/*_putchar(strList[n]);*/
-	return (0);
+        int count = 0;
+	int num = va_arg(intList, int);
+	unsigned int abs_num;
+
+	if (num < 0)
+	{
+		count += _putchar('-');
+		abs_num = (unsigned int)(-1 * num);
+	}
+	else
+		abs_num = (unsigned int)num;
+	
+	if (abs_num / 10) {
+		count += _putchar((abs_num / 10) + '0');
+	}
+	count += _putchar((abs_num % 10) + '0');
+	return (count);
 }
 
-int printInt(int n, va_list intList)
-{
-        /*_putchar(intList[n]);*/
-	return (0);
-}
-
-int printFlot(int n, va_list flotList)
+int printFlot(va_list flotList)
 {
 	/*_putchar(flotList[n]);*/
 	return (0);
