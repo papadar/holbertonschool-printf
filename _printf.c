@@ -11,7 +11,8 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i, k;
+	int i;
+	int count;
 	int (*func)(va_list arglist);
 
 	va_start(args, format);
@@ -20,7 +21,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] != '%')
 		{
-			_putchar(format[i]);
+			count += _putchar(format[i]);
 		}
 		else 
 		{
@@ -29,10 +30,11 @@ int _printf(const char *format, ...)
 			{
 				exit(99);
 			}		
-			func(args);
+			count += func(args);
 		}
 		i++;
 	}
+	return (count);
 }
 
 int (*get_op_func(const char *s))(va_list argList)
