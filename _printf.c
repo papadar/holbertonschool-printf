@@ -25,7 +25,7 @@ int _printf(const char *format, ...)
 		}
 		else 
 		{
-			func = get_op_func(format[i + 1]);
+			func = get_op_func(&format[i + 1]);
 			if (func == NULL)
 			{
 				exit(99);
@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 	return (count);
 }
 
-int (*get_op_func(char s))(va_list argList)
+int (*get_op_func(const char *s))(va_list argList)
 {
         op_t ops[] = {
                 {"c", printChar},
@@ -51,7 +51,7 @@ int (*get_op_func(char s))(va_list argList)
 
         while (ops[i].op)
         {
-                if (ops[i].op == (char *)s)
+                if (ops[i].op == s)
                 {
                         return (ops[i].f);
                 }
