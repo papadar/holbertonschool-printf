@@ -23,19 +23,16 @@ int _printf(const char *format, ...)
 		if (format[i] != '%')
 		{
 			count += _putchar(format[i]);
+			i++;
+		/*	printf("a\n");*/
 		}
 		else 
 		{
 			func = get_op_func(&format[i + 1]);
-			if (func == NULL)
-			{
-				printf("func not found\n");
-				exit(99);
-			}		
 			count += func(args);
-			i++;
+			i += 2;
+		/*	printf("b\n");*/
 		}
-		i++;
 	}
 	return (count);
 }
@@ -43,25 +40,23 @@ int _printf(const char *format, ...)
 int (*get_op_func(const char *s))(va_list argList)
 {
 	op_t ops[] = {
-                {"c", printChar},
-                {"i", printInt},
-                {"d", printFlot},
-                {"s", printStr},
-		{"R", printRepeat},
-		{NULL, NULL}
+                {'c', printChar},
+                {'i', printInt},
+                {'d', printInt},
+                {'s', printStr},
+		{'R', printRepeat},
+		{'\0', NULL}
         };
         int i = 0;
 
-        while (ops[i].op != 0)
+        while (ops[i].op != '\0')
         {
-                printf("value im getting from s = %s\n",s);
-		
-		if (ops[i].op[0] == s[0])
+		if (ops[i].op == *s)
                 {
-                        return (ops[i].f);
+                        /*printf("the char is%c&\n",*s);*/
+			return (ops[i].f);
                 }
-		printf("error message\n");
-                i++;
+		i++;
         }
         return (NULL);
 }
@@ -101,20 +96,30 @@ int printInt(va_list intList)
 {
         int count = 0;
 	int num = va_arg(intList, int);
-	unsigned int abs_num;
+	int abs_num;
+	int tmp;
+	int n = 1;
+
+	printf("num = %d\n", num);
 
 	if (num < 0)
 	{
-		count += _putchar('-');
-		abs_num = (unsigned int)(-1 * num);
+	/*	count += _putchar('-');*/
+		abs_num = (-1 * num);
 	}
 	else
-		abs_num = (unsigned int)num;
+		abs_num = num;
 	
-	while (abs_num / 10) {
-		count += _putchar((abs_num / 10) + '0');
+	while (abs_num / 10 > 0)
+	{	
+		tmp = abs_num;
+		while (tmp / 10 > 10)
+		{
+			tmp = tmp / 10;
+		}
+		count += _putchar(tmp + '0');
 	}
-	count += _putchar((abs_num % 10) + '0');
+	/* while a mod of abs_num > 10 ()*/
 	return (count);
 }
 
