@@ -15,6 +15,6 @@ int printFlot(va_list flotList);
 int printStr(va_list strList);
 int _putchar(char c);
 int _printf(const char *format, ...);
-int (*get_op_func(const char *s))(va_list argList);
+int (*get_op_func(char s))(va_list argList);
 
 #endif
