@@ -13,6 +13,7 @@ int printChar(va_list charList);
 int printInt(va_list intList);
 int printFlot(va_list flotList);
 int printStr(va_list strList);
+int printRepeat(va_list repeatList);
 int _putchar(char c);
 int _printf(const char *format, ...);
 int (*get_op_func(const char *s))(va_list argList);

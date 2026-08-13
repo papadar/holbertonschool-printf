@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * _printf - print a string interspersed with other vars
@@ -28,6 +29,7 @@ int _printf(const char *format, ...)
 			func = get_op_func(&format[i + 1]);
 			if (func == NULL)
 			{
+				printf("func not found\n");
 				exit(99);
 			}		
 			count += func(args);
@@ -40,24 +42,34 @@ int _printf(const char *format, ...)
 
 int (*get_op_func(const char *s))(va_list argList)
 {
-        op_t ops[] = {
+	op_t ops[] = {
                 {"c", printChar},
                 {"i", printInt},
                 {"d", printFlot},
                 {"s", printStr},
-                {NULL, NULL}
+		{"R", printRepeat},
+		{NULL, NULL}
         };
         int i = 0;
 
-        while (ops[i].op)
+        while (ops[i].op != 0)
         {
-                if (ops[i].op == s)
+                printf("value im getting from s = %s\n",s);
+		
+		if (ops[i].op[0] == s[0])
                 {
                         return (ops[i].f);
                 }
+		printf("error message\n");
                 i++;
         }
         return (NULL);
+}
+
+int printRepeat(va_list repeatList)
+{
+	return (1);
+
 }
 
 int printChar(va_list charList)
