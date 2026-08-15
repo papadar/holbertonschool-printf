@@ -3,6 +3,13 @@
 
 #include <stdarg.h>
 
+/**
+ * struct op - the struct containing the function pointers
+ *
+ * @op: the operation character to compare
+ * @f: the function pointer to return
+ */
+
 typedef struct op
 {
 	char op;
