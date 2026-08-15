@@ -37,7 +37,6 @@ int main(void)
     _printf("Complete the sentence: You %s nothing, Jon Snow.\n", "know");
     printf("Complete the sentence: You %s nothing, Jon Snow.\n", "know");
     _printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
-    printf("Complete the sentence: You %s nothing, Jon Snow.\n", (char *)0);
     _printf("%c%cth %s%s a%cg%s: Y%sou %s no%ching%s Snow.%c", 'W', 'i', "some ", "more", 'r', "s", "", "know", 't', ", Jon", '\n');
     printf("%c%cth %s%s a%cg%s: Y%sou %s no%ching%s Snow.%c", 'W', 'i', "some ", "more", 'r', "s", "", "know", 't', ", Jon", '\n');
     _printf("%%");
@@ -48,17 +47,14 @@ int main(void)
     printf("%s%c%c%c%s%%%s%c", "Loading ", '.', '.', '.', " 99", " Please wait", '\n');
     _printf("css%ccs%scscscs", 'T', "Test");
     printf("css%ccs%scscscs", 'T', "Test");
-    _printf("man gcc:\n%s", str);
-    printf("man gcc:\n%s", str);
-    _printf(NULL);
-    printf(NULL);
+   /* _printf("man gcc:\n%s", str);*/
+   /* printf("man gcc:\n%s", str);*/
+   /* _printf(NULL);*/
+   /* printf(NULL);*/
     _printf("%c", '\0');
     printf("%c", '\0');
     _printf("%");
-    printf("%");
     _printf("%!\n");
-    printf("%!\n");
     _printf("%K\n");
-    printf("%K\n");
     return (0);
 }
