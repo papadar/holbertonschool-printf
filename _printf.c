@@ -3,6 +3,12 @@
 #include <stdarg.h>
 #include "main.h"
 
+/**
+ * _printf - a function to print a variable amount of characters
+ * @format: va_list of arguments that are parsed
+ * Return: the number of characters printed
+ */
+
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -28,8 +34,15 @@ int _printf(const char *format, ...)
 	return(count);
 }
 
+/**
+ * get_op_func - determines the appropriate function based on char comparison
+ * @s: pointer to a char to compare
+ * Return: function pointer to match char type
+ */
+
 int (*get_op_func(const char *s))(va_list argList)
 {
+	int i = 0;
 	op_t ops[] = 
 	{
 		{'c', printChar},
@@ -43,12 +56,13 @@ int (*get_op_func(const char *s))(va_list argList)
 		{'\0', NULL}
 	};
 
-	for (int i = 0; ops[i].op != '\0'; i++)
+	while (ops[i].op != '\0')
 	{
 		if (ops[i].op == *s)
 		{
 			return ops[i].f;
 		}
+		i++;
 	}
 	return (NULL);
 }

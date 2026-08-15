@@ -3,7 +3,21 @@
 #include <stdarg.h>
 #include "main.h"
 
+/**
+ * printStr - receives a string location, and prints each character
+ * @strList: va_list containing a string
+ * Return: the number of characters that were printed
+ */
+
 int printStr(va_list strList)
 {
-	return(0);
+	int i, count = 0;
+	char *str = va_arg(strList, char *);
+
+	while (str[i] != '\0')
+	{
+		count += _putchar(str[i]);
+		i++;
+	}
+	return (0);
 }
