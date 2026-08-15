@@ -19,6 +19,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
+			/* edge case needed for two %% in a row */
 			func = get_op_func(&format[i + 1]);
 			count += func(args);
 			i += 2;
