@@ -10,20 +10,21 @@
 int printOctRecursive(unsigned int n)
 {
 	int count = 0;
+	char digit;
 
 	if (n / 8)
 	{
 		count += printOctRecursive(n / 8);
 	}
 
-	char digit = (n % 8) + '0';
+	digit = (n % 8) + '0';
 	count += _putchar(digit);
 
 	return (count);
 }
 
 /**
- * printInt - Extracts an int from the va_list and passes it through
+ * printOct - Extracts an Octal value from the va_list and passes it through
  * a recursive function.
  * @octList: The argument list.
  * Return: Total number of characters printed in Octadecimal.
