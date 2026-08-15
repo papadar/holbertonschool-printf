@@ -2,7 +2,7 @@
 #include "main.h"
 
 /**
- * printInt - Extracts an int from the va_list, handles negtive number and prints.
+ * printInt - Extracts a +/- int from the va_list prints each digit
  * @intList: The argument list.
  * Return: Total number of characters printed (with minus sign if negative).
  */
