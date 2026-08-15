@@ -32,5 +32,7 @@ int main(void)
     printf("Character:[%c]\n", 'H');
     _printf("String:[%s]\n", "I am a string !");
     printf("String:[%s]\n", "I am a string !");
+    _printf("%s", "This sentence is retrieved from va_args!\n");
+    printf("%s", "This sentence is retrieved from va_args!\n");
     return (0);
 }
