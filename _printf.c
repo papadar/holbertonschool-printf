@@ -41,13 +41,15 @@ int _printf(const char *format, ...)
 			if (func != NULL)
 			{
 				count += func(args);
-				i += 2;/* skips both '%' + specifier */
+				i += 2;/* skips '%' + specifier */
 			}
 			/* if format[i + 1] isnt a valid spcifier, print literal */
 			else
 			{
+				/* unknown specifier -> print '%' and char literal */
 				count += _putchar(format[i]);
-				i++;
+				count += _putchar(format[i + 1]);
+				i += 2;
 			}
 		}
 	}
