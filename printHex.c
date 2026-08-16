@@ -9,14 +9,15 @@
 int printHexRecursive(unsigned int n)
 {
 	int count = 0;
+	char digit;
 	char *hexDigit = "0123456789ABCDEF";
-	
+
 	if (n / 16)
 	{
 		count += printHexRecursive(n / 16);
 	}
 
-	char digit = hexDigit[n % 16];
+	digit = hexDigit[n % 16];
 	count += _putchar(digit);
 
 	return (count);
