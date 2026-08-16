@@ -11,7 +11,7 @@
 
 int printStr(va_list strList)
 {
-	int i, count = 0;
+	int i = 0, count = 0;
 	char *str = va_arg(strList, char *);
 	char nil[7] = {'(','n','u','l','l',')','\0'};
 
