@@ -27,7 +27,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			/* '%' is the last character in format string */
+			/* Check for % at end of string */
 			if (format[i + 1] == '\0')
 			{
 				va_end(args);
