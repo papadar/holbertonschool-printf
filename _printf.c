@@ -10,7 +10,12 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 
-	while (format && format[i])
+	if (format == NULL)
+	{
+		return (-1);
+	}
+
+	while (format)
 	{
 		if (format[i] != '%')
 		{
@@ -19,11 +24,29 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
+			/* Check for % at end of string */
+			if (format[i + 1] == '\0')
+			{
+				va_end(args);
+				return (-1);
+			}
+
 			func = get_op_func(&format[i + 1]);
-			count += func(args);
+			/* Check for % followed by unknown specifier */
+			if (func == NULL)
+			{
+				count += _putchar('%');
+				count += _putchar(format[i + 1]);
+			}
+			else
+			{
+				count += func(args);
+			}
 			i += 2;
 		}
 	}
+
+	va_end(args);
 	return(count);
 }
 
