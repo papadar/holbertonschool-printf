@@ -44,7 +44,9 @@ int _printf(const char *format, ...)
 			/* if format[i + 1] isnt a valid spcifier, print literal */
 			else
 			{
+				/* unknown specifier -> print '%' and char literal */
 				count += _putchar(format[i]);
+				count += _putchar(format[i + 1]);
 				i++;
 			}
 		}
