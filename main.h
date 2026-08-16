@@ -28,5 +28,6 @@ int printHexRecursive(unsigned int n);
 int printHex(va_list hexList);
 int printStr(va_list strList);
 int printChar(va_list charList);
+int printPerc(va_list percList);
 
 #endif

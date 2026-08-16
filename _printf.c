@@ -27,12 +27,31 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			/* edge case needed for two %% in a row */
+			/* '%' is the last character in format string */
+			if (format[i + 1] == '\0')
+			{
+				va_end(args);
+				return (-1);
+			}
+
+			/* find matching func */
 			func = get_op_func(&format[i + 1]);
-			count += func(args);
-			i += 2;
+
+			/* check if func was found */
+			if (func != NULL)
+			{
+				count += func(args);
+				i += 2;/* skips both '%' + specifier */
+			}
+			/* if format[i + 1] isnt a valid spcifier, print literal */
+			else
+			{
+				count += _putchar(format[i]);
+				i++;
+			}
 		}
 	}
+	va_end(args);
 	return(count);
 }
 
@@ -48,6 +67,7 @@ int (*get_op_func(const char *s))(va_list argList)
 	op_t ops[] = 
 	{
 		{'c', printChar},
+		{'%', printPerc},
 		{'i', printInt},
 		{'d', printInt},
 		{'s', printStr},
