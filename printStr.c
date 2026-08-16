@@ -14,10 +14,12 @@ int printStr(va_list strList)
 	int i, count = 0;
 	char *str = va_arg(strList, char *);
 
+	if (str == NULL)
+		return (0);
 	while (str[i] != '\0')
 	{
 		count += _putchar(str[i]);
 		i++;
 	}
-	return (0);
+	return (count);
 }
