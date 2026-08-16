@@ -16,11 +16,14 @@ int printStr(va_list strList)
 	char nil[7] = {'(','n','u','l','l',')','\0'};
 
 	if (str == NULL)
+	{
 		while (nil[i] != '\0')
 		{
 			count += _putchar(nil[i]);
 			i++;
 		}	
+		return (count);
+	}
 	while (str[i] != '\0')
 	{
 		count += _putchar(str[i]);
