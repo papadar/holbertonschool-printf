@@ -27,17 +27,10 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			if (format[i + 1] == '%' || format[i + 1] == '\0')
-			{
-				count += _putchar(format[i]);
-				i++;
-			}
-			else
-			{
-				func = get_op_func(&format[i + 1]);
-				count += func(args);
-				i += 2;
-			}
+			/* edge case needed for two %% in a row */
+			func = get_op_func(&format[i + 1]);
+			count += func(args);
+			i += 2;
 		}
 	}
 	return(count);
